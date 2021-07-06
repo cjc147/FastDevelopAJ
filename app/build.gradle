@@ -10,7 +10,16 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters("armeabi", "armeabi-v7a", "armeabi-v8a", "mips", "mips64")
+        }
     }
+
+    sourceSets.main {
+        jniLibs.srcDirs "src/main/jniLibs"
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,4 +35,37 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    // OkHttp的依赖，Android端网络请求
+    implementation 'com.squareup.okhttp3:okhttp:4.8.0'
+    implementation("com.squareup.okhttp3:logging-interceptor:4.8.0")
+
+    // Glide的依赖，Android端加载图片
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
+
+    // Logger的依赖，Android端更清晰地打印日志
+    implementation 'com.orhanobut:logger:2.2.0'
+
+    // EventBus的依赖，Android端不同页面，不同线程间数据通信
+    implementation 'org.greenrobot:eventbus:3.2.0'
+
+    // Gson的依赖，Android端将对象封装成JSON格式的字符串，将JSON格式的字符串解析成对象
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Android Room的依赖，Android端使用本地数据库存取数据
+    def room_version = "2.2.5"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // 下拉刷新，上拉加载的依赖-核心
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    // 下拉刷新-经典刷新头
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'
+    // 上拉加载-经典加载
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'
+
+    // PhotoView的依赖，Android端查看大图
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }
